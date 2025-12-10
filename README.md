@@ -5,7 +5,7 @@
 
 Outil de screening de noms contre les listes de sanctions locales africaines (Zone UEMOA/CEMAC).
 
-**[Demo en ligne](https://regulatory-os.fr/tools/africa-sanctions)** | **[Regulatory OS](https://regulatory-os.fr)**
+**[Demo en ligne](https://regulatoryos.fr/tools/africa-sanctions)** | **[Regulatory OS](https://regulatoryos.fr)**
 
 ---
 
@@ -256,14 +256,14 @@ Les contributions sont les bienvenues !
 
 - LinkedIn : [robin-jacquet](https://www.linkedin.com/in/robin-jacquet/)
 - Email : robin.jacquet@regulatoryos.fr
-- Site : [Regulatory OS](https://regulatory-os.fr)
+- Site : [Regulatory OS](https://regulatoryos.fr)
 
 ---
 
 ## Voir aussi
 
 - [ICT-contractual-checks](https://github.com/regulatory-os/ICT-contractuel-checks) — Audit IA des contrats d'externalisation ICT
-- [Regulatory OS](https://regulatory-os.fr) — Plateforme open source de conformité réglementaire
+- [Regulatory OS](https://regulatoryos.fr) — Plateforme open source de conformité réglementaire
 
 ---
 

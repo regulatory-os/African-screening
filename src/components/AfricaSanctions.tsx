@@ -5,7 +5,7 @@
  * Uses fuzzy matching (Levenshtein distance) to find potential matches.
  *
  * @license AGPL-3.0
- * @author Regulatory OS (https://regulatory-os.fr)
+ * @author Regulatory OS (https://regulatoryos.fr)
  */
 
 import { useState, useCallback, useMemo } from "react";

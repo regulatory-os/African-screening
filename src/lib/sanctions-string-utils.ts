@@ -3,7 +3,7 @@
  * Used to compare names against sanctions lists even with typos/variations
  *
  * @license AGPL-3.0
- * @author Regulatory OS (https://regulatory-os.fr)
+ * @author Regulatory OS (https://regulatoryos.fr)
  */
 
 /**

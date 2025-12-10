@@ -5,7 +5,7 @@
  * Used to control the Levenshtein distance threshold for name matching.
  *
  * @license AGPL-3.0
- * @author Regulatory OS (https://regulatory-os.fr)
+ * @author Regulatory OS (https://regulatoryos.fr)
  */
 
 import { CircleHelp } from 'lucide-react';

@@ -8,7 +8,7 @@
  * - An API endpoint
  *
  * @license AGPL-3.0
- * @author Regulatory OS (https://regulatory-os.fr)
+ * @author Regulatory OS (https://regulatoryos.fr)
  */
 
 // =============================================================================
