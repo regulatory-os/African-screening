@@ -9,6 +9,20 @@ Outil de screening de noms contre les listes de sanctions locales africaines (Zo
 
 ---
 
+## À propos de ce projet
+
+> **Je ne suis pas développeur.**
+>
+> Je suis un professionnel de la conformité réglementaire avec 10 ans d'expérience dans le secteur financier. En accompagnant des clients en Afrique de l'Ouest, j'ai constaté qu'aucun outil de transaction monitoring n'intègre efficacement les listes de sanctions locales — souvent des PDF scannés ou des arrêtés ministériels non indexés.
+>
+> J'ai donc utilisé l'IA (Claude, Cursor, etc.) pour créer cet outil, d'abord pour mes propres besoins. Aujourd'hui, je le mets à disposition de la communauté : **pour inspiration et/ou utilisation**.
+>
+> Si un non-codeur comme moi peut créer ça, imaginez ce que vous pouvez faire avec l'IA dans votre propre métier.
+>
+> — **Robin Jacquet** · [LinkedIn](https://www.linkedin.com/in/robin-jacquet/)
+
+---
+
 ## Fonctionnalités
 
 - **Fuzzy Matching** : Algorithme de Levenshtein pour détecter les correspondances malgré les fautes de frappe ou variations orthographiques
@@ -238,10 +252,11 @@ Les contributions sont les bienvenues !
 
 ## Auteur
 
-**Robin Jacquet** — [Regulatory OS](https://regulatory-os.fr)
+**Robin Jacquet** — Professionnel de la conformité réglementaire, 10 ans d'expérience
 
+- LinkedIn : [robin-jacquet](https://www.linkedin.com/in/robin-jacquet/)
 - Email : robin.jacquet@regulatoryos.fr
-- GitHub : [@robinjacquet](https://github.com/robinjacquet)
+- Site : [Regulatory OS](https://regulatory-os.fr)
 
 ---
 
