@@ -1,0 +1,25 @@
+[
+  {
+    "id": 1,
+    "source_country": "BF",
+    "source_id": "BF001",
+    "source_reference": "Arrêté n°2024-0607/MEF/CAB du 19 novembre 2024",
+    "last_name": "BANDE",
+    "first_name": "Hama",
+    "full_name": "BANDE Hama",
+    "aliases": ["Balobo"],
+    "gender": "M",
+    "date_of_birth": "1990-12-31",
+    "date_of_birth_approx": false,
+    "place_of_birth": "Tapako/Yalgo/Tougouri",
+    "nationality": "Burkinabè",
+    "profession": "Cultivateur",
+    "phone_numbers": ["70619363", "76706179", "71639653", "78899235"],
+    "designation_date": "2024-11-19",
+    "end_date": "2025-05-19",
+    "designation_reason": "Combattant terroriste zone Ritkuilga/Bouroum",
+    "notes": "Gel 6 mois + interdiction de voyage. Expiration mai 2025 - à vérifier si renouvelé.",
+    "created_at": "2025-12-08T00:00:00Z",
+    "updated_at": "2025-12-08T00:00:00Z"
+  }
+]
