@@ -259,6 +259,55 @@ const AfricaSanctions = ({ language = 'fr' }: AfricaSanctionsProps) => {
     setShowValidationError(false);
   }, []);
 
+  // PDF translations
+  const pdfT = useMemo(() => ({
+    title: language === 'fr'
+      ? 'Rapport de Screening - Conformité Sanctions (Zone UEMOA)'
+      : 'Screening Report - Sanctions Compliance (UEMOA Zone)',
+    generatedOn: language === 'fr' ? 'Généré le' : 'Generated on',
+    performedBy: language === 'fr' ? 'Effectué par' : 'Performed by',
+    searchParams: language === 'fr' ? 'Paramètres de Recherche' : 'Search Parameters',
+    parameter: language === 'fr' ? 'Paramètre' : 'Parameter',
+    value: language === 'fr' ? 'Valeur' : 'Value',
+    searchInput: language === 'fr' ? 'Recherche (Input)' : 'Search (Input)',
+    targetType: language === 'fr' ? 'Type Cible' : 'Target Type',
+    allTypes: language === 'fr' ? 'Tous' : 'All',
+    personType: language === 'fr' ? 'Physique' : 'Individual',
+    entityType: language === 'fr' ? 'Morale' : 'Entity',
+    scannedLists: language === 'fr' ? 'Listes Scannées' : 'Scanned Lists',
+    allLists: language === 'fr' ? 'Toutes les listes (Consolidé)' : 'All lists (Consolidated)',
+    matchThreshold: language === 'fr' ? 'Seuil de Correspondance' : 'Match Threshold',
+    results: language === 'fr' ? 'Résultats du Screening' : 'Screening Results',
+    noMatch: language === 'fr'
+      ? 'AUCUNE CORRESPONDANCE TROUVÉE (NO MATCH)'
+      : 'NO MATCH FOUND',
+    match: 'Match',
+    sourceRef: language === 'fr' ? 'Source / Réf' : 'Source / Ref',
+    identityAlias: language === 'fr' ? 'Identité / Alias' : 'Identity / Alias',
+    details: language === 'fr' ? 'Détails (Bio/Admin)' : 'Details (Bio/Admin)',
+    reasonDates: language === 'fr' ? 'Motif & Dates' : 'Reason & Dates',
+    name: language === 'fr' ? 'Nom' : 'Name',
+    alias: 'Alias',
+    type: 'Type',
+    personLabel: language === 'fr' ? 'Personne Physique' : 'Individual',
+    entityLabel: language === 'fr' ? 'Entité' : 'Entity',
+    birthDate: language === 'fr' ? 'Date Naiss.' : 'Birth Date',
+    nationality: language === 'fr' ? 'Nationalité' : 'Nationality',
+    gender: language === 'fr' ? 'Sexe' : 'Gender',
+    profession: 'Profession',
+    leader: language === 'fr' ? 'Dirigeant' : 'Leader',
+    deputy: language === 'fr' ? 'Adjoint' : 'Deputy',
+    ref: language === 'fr' ? 'Réf' : 'Ref',
+    warning: language === 'fr' ? 'ATTENTION' : 'WARNING',
+    designationDate: language === 'fr' ? 'Date Désign.' : 'Designation Date',
+    reason: language === 'fr' ? 'Motif' : 'Reason',
+    nd: language === 'fr' ? 'ND' : 'N/A',
+    comments: language === 'fr' ? 'Commentaires' : 'Comments',
+    noComment: language === 'fr' ? 'Aucun commentaire.' : 'No comment.',
+    pageOf: language === 'fr' ? 'sur' : 'of',
+    confidential: language === 'fr' ? 'Confidentiel' : 'Confidential',
+  }), [language]);
+
   // Generate PDF report
   const generatePDF = useCallback(async () => {
     if (!screenerName.trim() || !comment.trim()) {
@@ -283,33 +332,33 @@ const AfricaSanctions = ({ language = 'fr' }: AfricaSanctionsProps) => {
       // Title
       doc.setFontSize(16);
       doc.setTextColor(brandBlue[0], brandBlue[1], brandBlue[2]);
-      doc.text('Rapport de Screening - Conformité Sanctions (Zone UEMOA)', 14, 22);
+      doc.text(pdfT.title, 14, 22);
 
       // Metadata
       doc.setFontSize(10);
       doc.setTextColor(100);
-      const dateStr = new Date().toLocaleString('fr-FR');
-      doc.text(`Généré le: ${dateStr}`, 14, 30);
-      if (screenerName) doc.text(`Effectué par: ${screenerName}`, 14, 35);
+      const dateStr = new Date().toLocaleString(language === 'fr' ? 'fr-FR' : 'en-US');
+      doc.text(`${pdfT.generatedOn}: ${dateStr}`, 14, 30);
+      if (screenerName) doc.text(`${pdfT.performedBy}: ${screenerName}`, 14, 35);
 
       // Search Parameters section
       doc.setFontSize(12);
       doc.setTextColor(brandBlue[0], brandBlue[1], brandBlue[2]);
-      doc.text('Paramètres de Recherche', 14, 45);
+      doc.text(pdfT.searchParams, 14, 45);
 
       const allCountriesSelected = searchParams.sourceCountries.length === Object.keys(COUNTRY_CODES).length;
       const sourceLabel = allCountriesSelected
-        ? 'Toutes les listes (Consolidé)'
+        ? pdfT.allLists
         : searchParams.sourceCountries.map(code => COUNTRY_CODES[code]).join(', ');
 
       autoTable(doc, {
         startY: 50,
-        head: [['Paramètre', 'Valeur']],
+        head: [[pdfT.parameter, pdfT.value]],
         body: [
-          ['Recherche (Input)', searchParams.query],
-          ['Type Cible', searchParams.targetType === 'All' ? 'Tous' : (searchParams.targetType === 'Person' ? 'Physique' : 'Morale')],
-          ['Listes Scannées', sourceLabel],
-          ['Seuil de Correspondance', `${searchParams.fuzzyThreshold}%`],
+          [pdfT.searchInput, searchParams.query],
+          [pdfT.targetType, searchParams.targetType === 'All' ? pdfT.allTypes : (searchParams.targetType === 'Person' ? pdfT.personType : pdfT.entityType)],
+          [pdfT.scannedLists, sourceLabel],
+          [pdfT.matchThreshold, `${searchParams.fuzzyThreshold}%`],
         ],
         theme: 'grid',
         headStyles: {
@@ -327,17 +376,17 @@ const AfricaSanctions = ({ language = 'fr' }: AfricaSanctionsProps) => {
       // Results section
       doc.setFontSize(12);
       doc.setTextColor(brandBlue[0], brandBlue[1], brandBlue[2]);
-      doc.text('Résultats du Screening', 14, currentY);
+      doc.text(pdfT.results, 14, currentY);
 
       if (matches.length === 0) {
         doc.setFontSize(11);
         doc.setTextColor(0, 128, 0);
-        doc.text('AUCUNE CORRESPONDANCE TROUVÉE (NO MATCH)', 14, currentY + 10);
+        doc.text(pdfT.noMatch, 14, currentY + 10);
         doc.setTextColor(0);
         currentY += 25;
       } else {
         const rows = matches.map((m) => {
-          const matchInfo = `${m.score}%\n(${m.matchedOn === 'Name' ? 'Nom' : 'Alias'})`;
+          const matchInfo = `${m.score}%\n(${m.matchedOn === 'Name' ? pdfT.name : pdfT.alias})`;
 
           let identity = "";
           let bio = "";
@@ -345,46 +394,46 @@ const AfricaSanctions = ({ language = 'fr' }: AfricaSanctionsProps) => {
 
           if (m.type === 'Person') {
             const item = m.item as SanctionedPerson;
-            identity += `Nom: ${item.full_name}\n`;
-            identity += `Type: Personne Physique\n`;
-            if (item.aliases && item.aliases.length > 0) identity += `Alias: ${item.aliases.join(', ')}`;
+            identity += `${pdfT.name}: ${item.full_name}\n`;
+            identity += `${pdfT.type}: ${pdfT.personLabel}\n`;
+            if (item.aliases && item.aliases.length > 0) identity += `${pdfT.alias}: ${item.aliases.join(', ')}`;
 
-            bio += `Date Naiss.: ${formatDate(item.date_of_birth)}\n`;
-            bio += `Nationalité: ${item.nationality || 'ND'}\n`;
-            bio += `Sexe: ${item.gender || 'ND'}\n`;
-            bio += `Profession: ${item.profession || 'ND'}\n`;
+            bio += `${pdfT.birthDate}: ${formatDate(item.date_of_birth)}\n`;
+            bio += `${pdfT.nationality}: ${item.nationality || pdfT.nd}\n`;
+            bio += `${pdfT.gender}: ${item.gender || pdfT.nd}\n`;
+            bio += `${pdfT.profession}: ${item.profession || pdfT.nd}\n`;
 
             const expirationWarning = getExpirationWarning(item.source_country);
-            source = `${COUNTRY_CODES[item.source_country]} (${item.source_country})\nID: ${item.source_id || item.id}\nRéf: ${item.source_reference || 'ND'}`;
+            source = `${COUNTRY_CODES[item.source_country]} (${item.source_country})\nID: ${item.source_id || item.id}\n${pdfT.ref}: ${item.source_reference || pdfT.nd}`;
             if (expirationWarning) {
-              source += `\n\n[!] ATTENTION:\n${expirationWarning}`;
+              source += `\n\n[!] ${pdfT.warning}:\n${expirationWarning}`;
             }
 
-            const motif = `Date Désign.: ${formatDate(item.designation_date)}\n\nMotif:\n${item.designation_reason || 'ND'}`;
+            const motif = `${pdfT.designationDate}: ${formatDate(item.designation_date)}\n\n${pdfT.reason}:\n${item.designation_reason || pdfT.nd}`;
             return [matchInfo, source, identity, bio, motif];
           } else {
             const item = m.item as SanctionedEntity;
-            identity += `Nom: ${item.name}\n`;
-            identity += `Type: ${item.entity_type || 'Entité'}\n`;
-            if (item.aliases && item.aliases.length > 0) identity += `Alias: ${item.aliases.join(', ')}`;
+            identity += `${pdfT.name}: ${item.name}\n`;
+            identity += `${pdfT.type}: ${item.entity_type || pdfT.entityLabel}\n`;
+            if (item.aliases && item.aliases.length > 0) identity += `${pdfT.alias}: ${item.aliases.join(', ')}`;
 
-            bio += `Dirigeant: ${item.leader || 'ND'}\n`;
-            if (item.deputy_leader) bio += `Adjoint: ${item.deputy_leader}\n`;
+            bio += `${pdfT.leader}: ${item.leader || pdfT.nd}\n`;
+            if (item.deputy_leader) bio += `${pdfT.deputy}: ${item.deputy_leader}\n`;
 
             const expirationWarning = getExpirationWarning(item.source_country);
-            source = `${COUNTRY_CODES[item.source_country]} (${item.source_country})\nRéf: ${item.source_reference || 'ND'}`;
+            source = `${COUNTRY_CODES[item.source_country]} (${item.source_country})\n${pdfT.ref}: ${item.source_reference || pdfT.nd}`;
             if (expirationWarning) {
-              source += `\n\n[!] ATTENTION:\n${expirationWarning}`;
+              source += `\n\n[!] ${pdfT.warning}:\n${expirationWarning}`;
             }
 
-            const motif = `Date Désign.: ${formatDate(item.designation_date)}`;
+            const motif = `${pdfT.designationDate}: ${formatDate(item.designation_date)}`;
             return [matchInfo, source, identity, bio, motif];
           }
         });
 
         autoTable(doc, {
           startY: currentY + 5,
-          head: [['Match', 'Source / Réf', 'Identité / Alias', 'Détails (Bio/Admin)', 'Motif & Dates']],
+          head: [[pdfT.match, pdfT.sourceRef, pdfT.identityAlias, pdfT.details, pdfT.reasonDates]],
           body: rows,
           theme: 'striped',
           headStyles: { fillColor: [185, 28, 28], halign: 'center' },
@@ -411,19 +460,19 @@ const AfricaSanctions = ({ language = 'fr' }: AfricaSanctionsProps) => {
         doc.addPage();
         doc.setFontSize(12);
         doc.setTextColor(brandBlue[0], brandBlue[1], brandBlue[2]);
-        doc.text('Commentaires', 14, 20);
+        doc.text(pdfT.comments, 14, 20);
 
         doc.setFontSize(10);
         doc.setTextColor(80);
-        doc.text(doc.splitTextToSize(comment || "Aucun commentaire.", 180), 14, 30);
+        doc.text(doc.splitTextToSize(comment || pdfT.noComment, 180), 14, 30);
       } else {
         doc.setFontSize(12);
         doc.setTextColor(brandBlue[0], brandBlue[1], brandBlue[2]);
-        doc.text('Commentaires', 14, currentY);
+        doc.text(pdfT.comments, 14, currentY);
 
         doc.setFontSize(10);
         doc.setTextColor(80);
-        doc.text(doc.splitTextToSize(comment || "Aucun commentaire.", 180), 14, currentY + 7);
+        doc.text(doc.splitTextToSize(comment || pdfT.noComment, 180), 14, currentY + 7);
       }
 
       // Footer on all pages
@@ -436,7 +485,7 @@ const AfricaSanctions = ({ language = 'fr' }: AfricaSanctionsProps) => {
 
         doc.setFontSize(8);
         doc.setTextColor(150);
-        doc.text(`Page ${i} sur ${pageCount} - Confidentiel`, pageWidth / 2, pageHeight - 15, { align: 'center' });
+        doc.text(`Page ${i} ${pdfT.pageOf} ${pageCount} - ${pdfT.confidential}`, pageWidth / 2, pageHeight - 15, { align: 'center' });
 
         const poweredText = "Powered by African-Screening (AGPL-3.0)";
         doc.text(poweredText, pageWidth / 2, pageHeight - 8, { align: 'center' });
@@ -444,12 +493,15 @@ const AfricaSanctions = ({ language = 'fr' }: AfricaSanctionsProps) => {
 
       doc.save(`screening_uemoa_${new Date().getTime()}.pdf`);
     } catch (error) {
-      console.error("Erreur génération PDF:", error);
-      alert(`Erreur technique : ${error instanceof Error ? error.message : String(error)}`);
+      console.error("PDF generation error:", error);
+      alert(language === 'fr'
+        ? `Erreur technique : ${error instanceof Error ? error.message : String(error)}`
+        : `Technical error: ${error instanceof Error ? error.message : String(error)}`
+      );
     } finally {
       setIsGeneratingPdf(false);
     }
-  }, [screenerName, comment, searchParams, matches, isGeneratingPdf, language]);
+  }, [screenerName, comment, searchParams, matches, isGeneratingPdf, language, pdfT]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -555,6 +607,7 @@ const AfricaSanctions = ({ language = 'fr' }: AfricaSanctionsProps) => {
                         <FuzzySlider
                           value={searchParams.fuzzyThreshold}
                           onChange={(val) => setSearchParams({ ...searchParams, fuzzyThreshold: val })}
+                          language={language}
                         />
                       </div>
 

@@ -1,6 +1,6 @@
 {
   "name": "african-screening",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Name screening tool against UEMOA/CEMAC local sanctions lists",
   "author": "Robin Jacquet <robin.jacquet@regulatoryos.fr>",
   "license": "AGPL-3.0",
